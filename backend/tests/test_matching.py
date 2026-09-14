@@ -1,4 +1,10 @@
+from fastapi.testclient import TestClient
+
+from app.main import app
 from app.services.matching_service import calculate_match
+
+
+client = TestClient(app)
 
 
 def test_calculate_match_partial():
@@ -47,3 +53,24 @@ def test_calculate_match_no_required_skills():
     assert result["matched_skills"] == []
     assert result["missing_skills"] == []
     assert result["training_recommendations"] == []
+
+
+def test_match_endpoint():
+    response = client.post(
+        "/match",
+        json={
+            "employee_skills": ["Python", "SQL", "Git"],
+            "required_skills": ["Python", "SQL", "Git", "React"],
+        },
+    )
+
+    assert response.status_code == 200
+
+    data = response.json()
+
+    assert data["match_score"] == 75
+    assert data["matched_skills"] == ["git", "python", "sql"]
+    assert data["missing_skills"] == ["react"]
+    assert data["training_recommendations"] == [
+        "Complete introductory training in React"
+    ]
