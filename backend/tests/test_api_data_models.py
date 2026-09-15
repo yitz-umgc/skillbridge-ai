@@ -59,3 +59,16 @@ def test_project_required_fields():
     )
 
     assert response.status_code == 422
+
+
+def test_project_required_skills_not_empty():
+    response = client.post(
+        "/projects/",
+        json={
+            "name": "SkillBridge AI",
+            "description": "AI-powered employee skill matching platform",
+            "required_skills": [],
+        },
+    )
+
+    assert response.status_code == 422
