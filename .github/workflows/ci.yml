@@ -28,7 +28,7 @@ jobs:
 
       - name: Run tests
         working-directory: backend
-        run: python -m pytest --cov=app --cov-report=term-missing
+        run: python -m pytest -s --cov=app --cov-report=term-missing
         
   build-frontend:
     runs-on: ubuntu-latest
