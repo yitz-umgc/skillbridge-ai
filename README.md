@@ -59,9 +59,32 @@ Open `http://localhost:5173` in a web browser.
 3. Select **Analyze Match**.
 4. SkillBridge AI displays the match score, matched skills, missing skills, and training recommendations.
 
-## Testing and Continuous Integration
+## Testing, Performance, and Continuous Integration
 
-The project uses automated tests and GitHub Actions to validate the Alpha release. The CI workflow runs backend tests and frontend build validation on supported pushes and pull requests.
+SkillBridge AI uses automated testing and GitHub Actions to validate the integrated system on pushes and pull requests.
+
+Current validation includes:
+
+- 11 automated backend tests
+- 11/11 tests passing in the final CI run
+- 76% overall backend code coverage
+- 100% coverage of the core matching service
+- 100% coverage of the matching API route
+- Automated React frontend build validation
+- Matching-service performance benchmark
+
+The matching-service benchmark executes 1,000 matching operations with a performance requirement of completing in under 1 second. In the recorded GitHub Actions run, 1,000 operations completed in approximately 0.005 seconds.
+
+The benchmark measures the core matching service only and should not be interpreted as end-to-end application response time.
+
+## Documentation
+
+Additional project documentation is available in the `docs/` directory:
+
+- `docs/architecture.md` - System architecture and integration design
+- `docs/technical-debt.md` - Known technical debt and planned mitigation
+- `docs/user-manual.md` - Installation, usage, limitations, and troubleshooting
+- FastAPI interactive API documentation is available at `/docs` while the backend is running
 
 ## Current Technical Debt
 
